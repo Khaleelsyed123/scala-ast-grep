@@ -2,7 +2,7 @@
 # YAML Rule is more powerful!
 # https://ast-grep.github.io/guide/rule-config.html#rule
 
-id: no-console-except-error
+id: secure-flag
 language: scala
 rule:
   pattern: $EXP
