@@ -1,1 +1,47 @@
 
+# YAML Rule is more powerful!
+# https://ast-grep.github.io/guide/rule-config.html#rule
+
+id: no-console-except-error
+language: scala
+rule:
+  pattern: $EXP
+  kind: call_expression
+  all:
+    - has:
+        stopBy: end
+        kind: field_expression
+        all:
+          - has:
+             kind: identifier
+             field: value
+             pattern: $POOL
+          - has:
+              stopBy: end
+              kind: identifier
+              field: field
+              regex: setIgnoreComments
+    - has:
+        stopBy: end
+        kind: arguments
+        has:
+          kind: boolean_literal
+          regex: (false)
+    - inside:
+        stopBy: end
+        kind: function_definition
+        all:
+          - has:
+              stopBy: end
+              kind: val_definition
+              has:
+                stopBy: end
+                kind: identifier
+                pattern: $POOL
+transform:
+  FIX:
+    replace:
+      by: "true"
+      replace: "false"
+      source: $EXP
+fix: $FIX
