@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean
 class SAMLIgnoreComments {
   @Bean private[xml] def parserPool = {
     val pool = new BasicParserPool
-    // ruleid: scala_xml_rule-SAMLIgnoreComments
+    // ruleid: secure-flag
     pool.setIgnoreComments(false)
     pool
   }
