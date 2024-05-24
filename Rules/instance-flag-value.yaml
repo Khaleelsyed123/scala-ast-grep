@@ -1,0 +1,25 @@
+# YAML Rule is more powerful!
+# https://ast-grep.github.io/guide/rule-config.html#rule
+
+id: no-console-except-error
+language: scala
+rule:
+  pattern: $EXP
+  kind: boolean_literal
+  inside:
+         stopBy: end
+         all:
+           - has:
+              stopBy: end
+              kind: val_definition
+              pattern: $INS
+              all:
+              - has:
+                 stopBy: end
+                 kind: identifier
+                 pattern: $BBB
+              - has:
+                 stopBy: end
+                 kind: boolean_literal
+                 regex: (false)    
+fix: 'true'
