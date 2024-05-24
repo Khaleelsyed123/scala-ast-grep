@@ -16,7 +16,7 @@ class SAMLIgnoreComments {
   @Bean private[xml] def parserPool2(): Unit = {
     val shouldIgnore = false
     val pool = new BasicParserPool
-    // ruleid: scala_xml_rule-SAMLIgnoreComments
+    // ruleid: instance-secure-flag
     pool.setIgnoreComments(shouldIgnore)
   }
 }
