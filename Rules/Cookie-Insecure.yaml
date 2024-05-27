@@ -1,0 +1,82 @@
+# YAML Rule is more powerful!
+# https://ast-grep.github.io/guide/rule-config.html#rule
+
+id: scala_cookie_rule-CookieInsecure
+language: scala
+rule:
+  kind: call_expression
+  pattern: $PATTERN
+  all:
+   - has:
+      stopBY: end
+      kind: field_expression
+      pattern: $EXP
+      all:
+        - has:
+            stopBy: end
+            kind: identifier
+            field: value
+            pattern: $ABC
+        - has:
+            stopBy: end
+            kind: identifier
+            field: field
+            regex: setSecure
+   - has:
+        stopBy: end
+        kind: arguments
+        has:
+          kind: boolean_literal
+          regex: (false)
+transform:
+  FIX:
+    replace:
+      by: "true"
+      replace: "false"
+      source: $PATTERN
+fix: $FIX
+        
+
+
+   
+              
+                         
+
+
+
+
+
+
+      
+
+   
+           
+            
+
+ 
+      
+ 
+  
+   
+          
+        
+
+    
+    
+    
+
+
+
+
+  
+  
+  
+      
+        
+
+
+
+
+    
+   
+
