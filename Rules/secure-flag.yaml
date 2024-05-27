@@ -2,7 +2,7 @@
 # YAML Rule is more powerful!
 # https://ast-grep.github.io/guide/rule-config.html#rule
 
-id: secure-flag
+id: no-console-except-error-1
 language: scala
 rule:
   pattern: $EXP
@@ -45,3 +45,29 @@ transform:
       replace: "false"
       source: $EXP
 fix: $FIX
+
+---
+
+id: no-console-except-error-2
+language: scala
+rule:
+  pattern: $EXP
+  kind: boolean_literal
+  inside:
+         stopBy: end
+         all:
+           - has:
+              stopBy: end
+              kind: val_definition
+              pattern: $INS
+              all:
+              - has:
+                 stopBy: end
+                 kind: identifier
+                 pattern: $BBB
+              - has:
+                 stopBy: end
+                 kind: boolean_literal
+                 regex: (false)    
+fix: 'true'
+
